@@ -1,4 +1,5 @@
 import * as soap from "soap";
+import Templates from "./templates";
 // import { diffLines } from "diff";
 
 export const nsEnums: { [k: string]: boolean } = {};
@@ -329,19 +330,29 @@ export function outputTypedWsdl(a: ITypedWsdl): Array<{ file: string, data: stri
     const r: Array<{ file: string, data: string[] }> = [];
     for (const service of Object.keys(a.files)) {
         for (const port of Object.keys(a.files[service])) {
-            const d: { file: string, data: string[] } = { file: a.files[service][port], data: [] };
+            let fileName = a.files[service][port].replace('Soap','')
+            const interfaceFile: { file: string, data: string[] } = { file: fileName + "Types", data: [] };
+            const serviceFile: { file: string, data: string[] } = { file: fileName, data: [] };
             if (a.types[service] && a.types[service][port]) {
                 for (const type of Object.keys(a.types[service][port])) {
-                    d.data.push("export interface " + type + " " + a.types[service][port][type]);
+                    interfaceFile.data.push("export interface " + type + " " + a.types[service][port][type]);
                 }
             }
             if (a.methods[service] && a.methods[service][port]) {
                 const ms: string[] = [];
+                serviceFile.data.push(Templates.serviceHeaderTemplate({serviceName:service}));
                 for (const method of Object.keys(a.methods[service][port])) {
+                    let templateObj = {
+                        methodName:method,
+                        serviceName:service
+                    };
                     ms.push(method + ": " + a.methods[service][port][method] + ";");
+                    serviceFile.data.unshift(Templates.serviceImportTemplate(templateObj));
+                    serviceFile.data.push(Templates.serviceMethodTemplate(templateObj));
                 }
+                serviceFile.data.push("}")
                 if (ms.length) {
-                    d.data.push("export interface I" + port + "Soap {\n    " + ms.join("\n    ") + "\n}");
+                    interfaceFile.data.push("export interface I" + port + " {\n    " + ms.join("\n    ") + "\n}");
                 }
             }
             if (a.namespaces[service] && a.namespaces[service][port]) {
@@ -351,11 +362,12 @@ export function outputTypedWsdl(a: ITypedWsdl): Array<{ file: string, data: stri
                         ms.push(a.namespaces[service][port][ns][nsi].replace(/\n/g, "\n    "));
                     }
                     if (ms.length) {
-                        d.data.push("export namespace " + ns + " {\n    " + ms.join("\n    ") + "\n}");
+                        interfaceFile.data.push("export namespace " + ns + " {\n    " + ms.join("\n    ") + "\n}");
                     }
                 }
             }
-            r.push(d);
+            r.push(interfaceFile);
+            r.push(serviceFile);
         }
     }
     return r;

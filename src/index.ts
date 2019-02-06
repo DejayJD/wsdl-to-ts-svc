@@ -5,6 +5,7 @@ import { rename, writeFile } from "fs";
 import * as minimist from "minimist";
 import * as mkdirp from "mkdirp";
 import { IInterfaceOptions, ITypedWsdl, mergeTypedWsdl, outputTypedWsdl, wsdl2ts } from "./wsdl-to-ts";
+import CONFIG from './config';
 
 interface IConfigObject {
     outdir: string;
@@ -14,7 +15,7 @@ interface IConfigObject {
 }
 
 const opts: IInterfaceOptions = {};
-const config: IConfigObject = { outdir: "./wsdl", files: [], tslintDisable: ["max-line-length", "no-empty-interface"], tslintEnable: [] };
+const config: IConfigObject = { outdir: CONFIG.outdir, files: [], tslintDisable: ["max-line-length", "no-empty-interface"], tslintEnable: [] };
 
 const args = minimist(process.argv.slice(2));
 
@@ -83,8 +84,8 @@ Promise.all(config.files.map((a) => wsdl2ts(a, opts))).
     then(outputTypedWsdl).
     then((xs: Array<{ file: string, data: string[] }>) => {
         return Promise.all(xs.map((x) => {
-            console.log("-- %s --", x.file);
-            console.log("%s", x.data.join("\n\n"));
+            console.log("-- Writing to file %s.ts --", x.file);
+            // console.log("%s", x.data.join("\n\n"));
             const file = config.outdir + "/" + x.file;
             const dir = file.replace(/\/[^/]+$/, "");
             return mkdirpp(dir).then(() => {

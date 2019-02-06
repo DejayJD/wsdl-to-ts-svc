@@ -1,13 +1,13 @@
 {
-  "name": "wsdl-to-ts",
-  "version": "0.2.3",
-  "description": "Build TypeScript typings for SOAP WSDL",
+  "name": "wsdl-to-ts-svc",
+  "version": "1.0.0",
+  "description": "Build TypeScript typings and service for SOAP WSDL",
   "main": "lib/wsdl-to-ts.js",
   "module": "esm/wsdl-to-ts.js",
   "types": "esm/wsdl-to-ts.d.ts",
   "scripts": {
     "test": "node test/index.js",
-    "build": "npx tsc -p tsconfig.json && npx tsc -p tsconfig.json -d --outDir esm --module es2015 --target es2016",
+    "build": "npx tsc -w -p tsconfig.json && npx tsc -p tsconfig.json -d -w --outDir esm --module es2015 --target es2016",
     "ci": "npm run build && npm test"
   },
   "bin": {
@@ -17,11 +17,13 @@
     "soap",
     "typescript",
     "wsdl",
-    "ts"
+    "ts",
+    "service",
+    "angular"
   ],
   "author": {
-    "name": "TimLuq",
-    "url": "https://github.com/TimLuq"
+    "name": "DejayJD",
+    "url": "https://github.com/DejayJD"
   },
   "license": "ISC",
   "devDependencies": {
@@ -38,10 +40,10 @@
     "soap": ">=0.21.0 <1.0.0"
   },
   "bugs": {
-    "url": "https://github.com/TimLuq/wsdl-to-ts/issues"
+    "url": "https://github.com/DejayJD/wsdl-to-ts/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TimLuq/wsdl-to-ts.git"
+    "url": "https://github.com/DejayJD/wsdl-to-ts-svc.git"
   }
 }

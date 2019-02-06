@@ -5,7 +5,7 @@ import * as minimist from "minimist";
 import * as mkdirp from "mkdirp";
 import { mergeTypedWsdl, outputTypedWsdl, wsdl2ts } from "./wsdl-to-ts";
 const opts = {};
-const config = { outdir: "./wsdl", files: [], tslintDisable: ["max-line-length", "no-empty-interface"], tslintEnable: [] };
+const config = { outdir: "./lib", files: [], tslintDisable: ["max-line-length", "no-empty-interface"], tslintEnable: [] };
 const args = minimist(process.argv.slice(2));
 if (args.help) {
     // TODO
@@ -68,7 +68,7 @@ Promise.all(config.files.map((a) => wsdl2ts(a, opts))).
     then((xs) => {
     return Promise.all(xs.map((x) => {
         console.log("-- %s --", x.file);
-        console.log("%s", x.data.join("\n\n"));
+        // console.log("%s", x.data.join("\n\n"));
         const file = config.outdir + "/" + x.file;
         const dir = file.replace(/\/[^/]+$/, "");
         return mkdirpp(dir).then(() => {

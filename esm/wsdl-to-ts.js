@@ -297,6 +297,7 @@ export function mergeTypedWsdl(a, ...bs) {
     return x;
 }
 export function outputTypedWsdl(a) {
+    console.log(a);
     const r = [];
     for (const service of Object.keys(a.files)) {
         for (const port of Object.keys(a.files[service])) {
