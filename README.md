@@ -1,71 +1,51 @@
 # wsdl-to-ts-svc
 
-<a href="https://travis-ci.org/TimLuq/wsdl-to-ts">
-    <img src="https://travis-ci.org/TimLuq/wsdl-to-ts.svg?branch=master"
-         alt="build status" />
-</a>
-<a href="https://www.npmjs.com/package/wsdl-to-ts">
-    <img src="https://img.shields.io/npm/v/wsdl-to-ts.svg"
+<a href="https://www.npmjs.com/package/wsdl-to-ts-svc">
+    <img src="https://img.shields.io/npm/v/wsdl-to-ts-svc.svg"
          alt="npm version" />
 </a>
-<a href="https://github.com/TimLuq/wsdl-to-ts/blob/master/LICENSE">
-    <img src="https://img.shields.io/npm/l/wsdl-to-ts.svg"
+<a href="https://github.com/DejayJD/wsdl-to-ts-svc/blob/master/LICENSE">
+    <img src="https://img.shields.io/npm/l/wsdl-to-ts-svc.svg"
          alt="license" />
 </a>
-<a href="https://david-dm.org/TimLuq/wsdl-to-ts">
-    <img src="https://david-dm.org/TimLuq/wsdl-to-ts/status.svg"
-         alt="dependency status" />
-</a>
 
-A CLI tool and library for nodejs to generate TypeScript typings from a WSDL service.
+This project is a fork of `wsdl-to-ts`, however I wanted to go a step
+beyond just generating interface files, but also generate an Angular friendly service.
+A CLI tool and library for nodejs to generate TypeScript typings.
 
 ## Installation
-Installation is done either through [npm](https://npmjs.com) or [yarn](https://yarnpkg.com).
-
-### Installation for Command Line usage
+Installation is only through [npm](https://npmjs.com).
 
 To install CLI tool globally run one of the following command as root or sudo:
 ```sh
-$ npm install -g wsdl-to-ts
-$ yarn global add wsdl-to-ts
+$ npm install -g wsdl-to-ts-svc
 ```
 
 To install CLI tool for the current user one of these commands may be used (which places working directory at users `$HOME`):
 ```sh
-$ cd && npm install wsdl-to-ts
-$ cd && yarn add wsdl-to-ts
+$ cd && npm install wsdl-to-ts-svc
 ```
 
-### Installation for Library usage
+## Issues
 
-To install a library as a dependency to your current npm project you enter your project directory as the current directory and run one of the following commands:
-```sh
-$ npm install --save wsdl-to-ts
-$ yarn add wsdl-to-ts
-```
+Feel free to add any [issues](https://github.com/DejayJD/wsdl-to-ts-svc/issues).
 
-## Usage
-
-If any more documentation is needed for library usage, other than the IDE completions; feel free to open an [issue](https://github.com/TimLuq/wsdl-to-ts/issues). Also take a look at the [type definitions](https://github.com/TimLuq/wsdl-to-ts/blob/master/esm/wsdl-to-ts.d.ts)
-
-### Usage for Command Line
+### Usage
 
 Check version:
 ```sh
-$ wsdl-to-ts --version
+$ wsdl-to-ts-svc --version
 ```
 
-Generate typings for a WSDL located on an URI at the default output directory (multiple may be done at the same time by listing more on the command line):
+Generate typings and service layers for a WSDL located (multiple may be done at the same time by listing more on the command line):
 ```sh
 $ cd /tmp
-$ wsdl-to-ts "https://www.w3schools.com/xml/tempconvert.asmx?WSDL"
-$ ls wsdl/**/*
-wsdl/TempConvert/TempConvertSoap12.ts  wsdl/TempConvert/TempConvertSoap.ts
+$ wsdl-to-ts-svc "https://www.w3schools.com/xml/tempconvert.asmx?WSDL"
 ```
 
 The output directory may be changed to any directory using the `--outdir` flag.
 ```sh
-$ wsdl-to-ts --outdir="./some/other/dir" "https://www.w3schools.com/xml/tempconvert.asmx?WSDL"
+$ wsdl-to-ts-svc --outdir="./some/other/dir" "https://www.w3schools.com/xml/tempconvert.asmx?WSDL"
 ```
 
 #### CLI flags

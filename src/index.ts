@@ -5,7 +5,6 @@ import { rename, writeFile } from "fs";
 import * as minimist from "minimist";
 import * as mkdirp from "mkdirp";
 import { IInterfaceOptions, ITypedWsdl, mergeTypedWsdl, outputTypedWsdl, wsdl2ts } from "./wsdl-to-ts";
-import CONFIG from './config';
 
 interface IConfigObject {
     outdir: string;
@@ -14,8 +13,9 @@ interface IConfigObject {
     tslintEnable: null | string[];
 }
 
+const defaultOutDir = "wsdl";
 const opts: IInterfaceOptions = {};
-const config: IConfigObject = { outdir: CONFIG.outdir, files: [], tslintDisable: ["max-line-length", "no-empty-interface"], tslintEnable: [] };
+const config: IConfigObject = { outdir: defaultOutDir, files: [], tslintDisable: ["max-line-length", "no-empty-interface"], tslintEnable: [] };
 
 const args = minimist(process.argv.slice(2));
 
