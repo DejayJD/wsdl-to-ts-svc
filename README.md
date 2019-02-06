@@ -1,4 +1,4 @@
-# wsdl-to-ts
+# wsdl-to-ts-svc
 
 <a href="https://travis-ci.org/TimLuq/wsdl-to-ts">
     <img src="https://travis-ci.org/TimLuq/wsdl-to-ts.svg?branch=master"
