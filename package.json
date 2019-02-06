@@ -1,6 +1,6 @@
 {
   "name": "wsdl-to-ts-svc",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Build TypeScript typings and service for SOAP WSDL",
   "main": "lib/wsdl-to-ts.js",
   "module": "esm/wsdl-to-ts.js",
@@ -11,7 +11,7 @@
     "ci": "npm run build && npm test"
   },
   "bin": {
-    "wsdl-to-ts": "lib/index.js"
+    "wsdl-to-ts-svc": "lib/index.js"
   },
   "keywords": [
     "soap",
@@ -40,7 +40,7 @@
     "soap": ">=0.21.0 <1.0.0"
   },
   "bugs": {
-    "url": "https://github.com/DejayJD/wsdl-to-ts/issues"
+    "url": "https://github.com/DejayJD/wsdl-to-ts-svc/issues"
   },
   "repository": {
     "type": "git",
